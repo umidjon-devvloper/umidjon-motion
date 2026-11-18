@@ -3,6 +3,7 @@ import { CustomCursor } from "./components/cursor/CustomCursor";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { HeroSection } from "./components/hero/HeroSection";
+import { PromoBanner } from "./components/banner/PromoBanner";
 import { MotionOrbit } from "./components/portfolio/MotionOrbit";
 import { CinematicShowcase } from "./components/showcase/CinematicShowcase";
 import { ServicesSection } from "./components/services/ServicesSection";
@@ -27,6 +28,7 @@ export default function App() {
       <ScrollExperience />
       <main>
         <HeroSection />
+        <PromoBanner />
         <MotionOrbit />
         <CinematicShowcase />
         <ServicesSection />
