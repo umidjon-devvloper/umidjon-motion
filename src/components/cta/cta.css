@@ -1,0 +1,59 @@
+.final-cta {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  isolation: isolate;
+  text-align: center;
+}
+
+.final-cta__scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cta-canvas {
+  position: absolute !important;
+  inset: 0;
+}
+
+.final-cta__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 60% at 50% 50%,
+    rgba(7, 8, 12, 0.72) 0%,
+    rgba(7, 8, 12, 0.35) 45%,
+    rgba(7, 8, 12, 0.1) 75%
+  );
+}
+
+.final-cta__content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.final-cta__title {
+  font-size: clamp(2.6rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.final-cta__support {
+  max-width: 48ch;
+  text-align: center;
+}
+
+.final-cta__btn {
+  margin-top: 8px;
+  padding: 18px 34px;
+  font-size: 1rem;
+}
