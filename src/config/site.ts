@@ -21,20 +21,12 @@ export const site = {
   },
 
   /**
-   * Telegram BOT delivery for the contact form.
-   * The form submits straight to this bot, which messages the chat below.
-   *
-   * ⚠️ SECURITY: because this is a static site, the bot token ships inside the
-   * public JavaScript bundle — anyone can read it in the browser. Treat it as
-   * public. If it leaks / gets abused, regenerate it in @BotFather and paste the
-   * new one here. For a fully private token, move the send() call behind a tiny
-   * serverless endpoint later (see README).
+   * Contact-form delivery runs through the serverless function at /api/lead.
+   * The Telegram bot token + chat ID live there as PRIVATE env vars
+   * (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID), never in the client bundle.
+   * See api/lead.js and .env.example.
    */
-  telegramBot: {
-    token: "8908287961:AAEFz90S5MnHLXimwhWddMdGuxAH6qeUzq8",
-    /** Chat ID that receives every new project request. */
-    chatId: "6052648076",
-  },
+  leadEndpoint: "/api/lead",
 
   /** Short Uzbek/English copy reused across sections. */
   copy: {
@@ -60,22 +52,17 @@ export const links = {
 } as const;
 
 /**
- * Sends a contact-form brief to the Telegram bot, which delivers it to the
- * configured chat. Resolves true on success, false on any failure so the UI
- * can fall back to opening a manual Telegram chat. Never throws.
+ * Sends a contact-form brief through the serverless lead endpoint, which
+ * forwards it to Telegram using the private bot token. Resolves true on
+ * success, false on any failure so the UI can fall back to opening a manual
+ * Telegram chat. Never throws.
  */
 export async function sendTelegramLead(message: string): Promise<boolean> {
-  const { token, chatId } = site.telegramBot;
-  if (!token || !chatId) return false;
   try {
-    const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+    const res = await fetch(site.leadEndpoint, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-        disable_web_page_preview: true,
-      }),
+      body: JSON.stringify({ message }),
     });
     const data = (await res.json().catch(() => null)) as { ok?: boolean } | null;
     return Boolean(res.ok && data?.ok);
