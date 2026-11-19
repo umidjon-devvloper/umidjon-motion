@@ -1,6 +1,6 @@
 .why--illustrated { padding-block:clamp(70px,7vw,120px); background:#07080c; overflow:hidden; }
 .why--illustrated::before { display:none; }
-.why--illustrated .why__grid { max-width:1640px; grid-template-columns:.85fr 1.15fr; gap:5%; align-items:center; padding-inline:clamp(24px,6vw,100px); }
+.why--illustrated .why__grid { max-width:var(--maxw); grid-template-columns:.85fr 1.15fr; gap:5%; align-items:center; padding-inline:var(--gutter); }
 .why--illustrated .why__intro { align-self:start; }
 .why--illustrated .eyebrow { border:1px solid #ffffff66; border-radius:30px; padding:7px 17px; background:linear-gradient(90deg,#b8ff3528,transparent 30%); color:#eee; font-size:clamp(10px,1.05vw,17px); letter-spacing:.08em; }
 .why--illustrated .eyebrow::before { content:"✦"; color:var(--accent); font-size:25px; width:auto; height:auto; line-height:1; background:none; text-shadow:0 0 15px #bcff32; }
